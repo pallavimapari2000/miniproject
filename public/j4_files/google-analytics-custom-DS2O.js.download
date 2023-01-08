@@ -1,0 +1,665 @@
+var GAFieldCategoryDS = "";
+if (document.getElementById("GAFieldCategoryDS")) {
+  GAFieldCategoryDS = document.getElementById("GAFieldCategoryDS").value;
+}
+var GAFieldPlanAmountDS = "";
+if (document.getElementById("GAFieldPlanAmountDS")) {
+  GAFieldPlanAmountDS = $("#plan-detail-modal h3").html();
+}
+var GAFieldAppNameDS = "";
+if (document.getElementById("GAFieldAppNameDS")) {
+  GAFieldAppNameDS = document.getElementById("GAFieldAppNameDS").value;
+}
+
+function GABannerDS(bannerName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Top banner",
+      "new_Label": bannerName
+    });
+  } catch (e) {}
+}
+
+function GAChipsDS(chipName, clickName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": chipName,
+      "new_Label": clickName
+    });
+  } catch (e) {}
+}
+
+function GAPlansButtonDS(newLabel, value, packName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Plan cards",
+      "new_Label": newLabel,
+      "eventValue": value,
+      "PackName": packName,
+      "RechargeType": GAFieldCategoryDS
+    });
+  } catch (e) {}
+}
+
+function GAPlansViewAllDS(label) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Plan cards",
+      "new_Label": label
+    })
+  } catch (e) {}
+}
+
+function GASmallProductsDS(productTitle) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Products",
+      "new_Label": productTitle
+    })
+  } catch (e) {}
+}
+
+function GAProductsViewAllDS() {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Products",
+      "new_Label": "View all products"
+    });
+  } catch (e) {}
+}
+
+function GAMoreJioDS(bannerName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Promo banner",
+      "new_Label": bannerName
+    });
+  } catch (e) {}
+}
+
+function GAMoreJioViewAllDS() {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Promo banner",
+      "new_Label": "View all offers"
+    });
+  } catch (e) {}
+}
+
+function GAAppCardDS(buttonTitle, appTitle) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Apps",
+      "new_Label": buttonTitle + "-" + appTitle
+    });
+  } catch (e) {}
+}
+
+function GAAppsViewAllDS(action, label) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": action,
+      "new_Label": label
+    });
+  } catch (e) {}
+}
+
+function GAAppsGetNowPopUpDS(action, appname) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": action,
+      "new_Label": appname
+    })
+  } catch (e) {}
+}
+
+function GADigiCardDS(cardtitle) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Services",
+      "new_Label": cardtitle
+    })
+  } catch (e) {}
+}
+
+function GADigiCardViewMoreDS() {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Services",
+      "new_Label": "View all services"
+    });
+  } catch (e) {}
+}
+
+function GAAppIntroDS(buttonText, appName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": buttonText,
+      "new_Label": appName
+    });
+  } catch (e) {}
+}
+
+function GAViewDetailsPopUpDS(label, value, packname) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Plan cards popup",
+      "new_Label": label,
+      "eventValue": value,
+      "PackName": packname,
+      "RechargeType": GAFieldCategoryDS
+    })
+  } catch (e) {}
+}
+
+function GAFAQDS(label, action, category, event, redirecturl, target, generalData) {
+  try {
+    var subcat = '';
+    if ($('li.tab-item a.tab-link.j-heading[aria-selected="true"]')) {
+      subcat = $('li.tab-item a.tab-link.j-heading[aria-selected="true"]').text();
+    } else {
+      subcat = label;
+    }
+    dataLayer.push({
+      "event": event,
+      "new_Category": category,
+      "new_Action": action,
+      "new_Label": subcat,
+      "new_General_Data": generalData
+    });
+  } catch (e) {}
+}
+
+function GAQRContinue(isFiber, status, reason) {
+  try {
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var fiberOrMobileHomepage = "Mobile homepage";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber homepage";
+    }
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": fiberOrMobileHomepage,
+      "new_Action": "Quick links popup",
+      "new_Label": "Number validation " + status,
+      "new_General_Data": reason
+    });
+  } catch (e) {}
+}
+
+function GAQREditNumber(isFiber) {
+  try {
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var fiberOrMobileHomepage = "Mobile homepage";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber homepage";
+    }
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": fiberOrMobileHomepage,
+      "new_Action": " Quick links popup",
+      "new_Label": "Edit number"
+    });
+  } catch (e) {}
+}
+
+function GAQRViewAllPlans(isFiber) {
+  try {
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var fiberOrMobileHomepage = "Mobile homepage";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber homepage";
+    }
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": fiberOrMobileHomepage,
+      "new_Action": "Quick links popup",
+      "new_Label": "View all plans"
+    });
+  } catch (e) {}
+}
+
+function GAQRContinueWithPlan(isFiber) {
+  try {
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var fiberOrMobileHomepage = "Mobile";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "JioFiber";
+    }
+    var rechargeValue = $(".continue-plan-btn").text().replace(/\D/g, '');
+    var planId = $(".continue-plan-btn").attr("dyn-externalid");
+    dataLayer.push({
+      "event": "Recharge",
+      "new_Category": "Recharge",
+      "new_Action": "Recharge Initiated",
+      "new_Label": "Click",
+      "eventValue": rechargeValue,
+      "PackName": "Popular plans | " + rechargeValue,
+      "planCategory": "Popular plans",
+      "planId": planId,
+      "loginType": fiberOrMobileHomepage,
+      "billType": "Prepaid",
+      "RechargeType": "Quick Recharge popup | " + loggedInStatus
+    });
+  } catch (e) {}
+}
+
+function GAPBViewBill(isFiber) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    /*dataLayer.push ({
+      "event" : "quickpay_postpaid" ,
+      "new_Category" : "Quick Pay Bill ",
+      "new_Action" : "View bill summary",
+      "new_Label" : "Click",
+      "billType":"Postpaid " + fiberOrMobileHomepage
+    });*/
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "view bill summary success",
+      "new_Label": "NA",
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype,
+      "RechargeType": "Fetch Bill popup | " + loggedInStatus
+    });
+  } catch (e) {}
+}
+
+function GAPBContinueWithAmt(isFiber, status, reason) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var billAmount = $("#paybill-user-amount").val();
+    var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "pay bill initiate " + status,
+      "new_Label": reason,
+      "eventValue": billAmount,
+      "RechargeType": "Quick Pay Bill popup | " + loggedInStatus,
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype,
+      "new_General_Data": "Manual"
+    });
+  } catch (e) {}
+}
+
+function GAPBGenerateOtp(isFiber, status, reason) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var entry_source = "Homepage	quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "generate otp " + status,
+      "new_Label": reason,
+      "RechargeType": "Fetch Bill popup | " + loggedInStatus,
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype
+    });
+  } catch (e) {
+    console.info(e);
+  }
+}
+
+function GAPBResendOtp(isFiber, status, reason) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "resend otp " + status,
+      "new_Label": reason,
+      "RechargeType": "Fetch Bill popup | " + loggedInStatus,
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype
+    })
+  } catch (e) {}
+}
+
+function GAPBValidateOtp(isFiber, status, reason) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "validate otp " + status,
+      "new_Label": reason,
+      "RechargeType": "Fetch Bill popup | " + loggedInStatus,
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype
+    })
+  } catch (e) {}
+}
+
+function GAPBPay(isFiber, status, reason) {
+  try {
+    var fiberOrMobileHomepage = "Mobile";
+    var servicetype = "mobility postpaid";
+    if (isFiber == 'true') {
+      fiberOrMobileHomepage = "Fiber";
+      servicetype = "fiber postpaid";
+    }
+    var loggedInStatus = "Non Logged In";
+    if ($('#loggedin-content').text() != '') {
+      loggedInStatus = "Logged In";
+    }
+    var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source = "Mobilepage banner";
+    }
+    var amt = $("#due-amt").html().replace(/[^0-9.]/g, '');
+    var fetchType = "Auto fetched";
+    if ($("#due-amt").attr('autoOrManual') != undefined) {
+      fetchType = $("#due-amt").attr('autoOrManual');
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "bill pay initiate " + status,
+      "new_Label": reason,
+      "eventValue": amt,
+      "RechargeType": "Fetch Bill popup | " + loggedInStatus,
+      "new_General_Data": fetchType,
+      "EntrySource": entry_source,
+      "Recharge_Source": "jio.com",
+      "ServiceType": servicetype
+    });
+  } catch (e) {}
+}
+
+function selectSimGA(tabName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "How to use esim",
+      "new_Label": tabName
+    });
+  } catch (e) {}
+}
+
+function GAmnpBannerDS() {
+  dataLayer.push({
+    "event": "MNPDiscovery",
+    "new_Category": "MNP Discovery",
+    "new_Action": "Unmatched benefits",
+    "new_Label": "Port to jio"
+  });
+}
+
+function GAmnpThreeCardsDS() {
+  dataLayer.push({
+    "event": "MNPDiscovery",
+    "new_Category": "MNP Discovery",
+    "new_Action": "Without changing number",
+    "new_Label": "Port to jio"
+  });
+}
+
+function MNPStepsGA(buttontext) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Without changing number",
+      "new_Label": buttontext
+    });
+  } catch (e) {}
+}
+
+function GAEsimTabsDS(sectiontext, tabtext) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": sectiontext,
+      "new_Label": tabtext
+    });
+  } catch (e) {}
+}
+
+function GASupportCardDS(buttontext) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": buttontext,
+      "new_Label": "Click"
+    });
+  } catch (e) {}
+}
+
+function GAuseESimDS(popupButtonName) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Device compatibility check popup",
+      "new_Label": popupButtonName
+    });
+  } catch (e) {}
+}
+
+function GASupportTabsDS(tabButtonText) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Support",
+      "new_Label": tabButtonText
+    });
+  } catch (e) {}
+}
+
+function GALargeVideoDS() {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Overview",
+      "new_Label": "Video"
+    })
+  } catch (e) {}
+}
+
+function GANewHomepagesDS(label, action, event, redirecturl, target, generalData) {
+  try {
+    if (action && action == 'JioFiber') {
+      action = 'Fiber'; // As per GA team request
+    }
+    dataLayer.push({
+      "event": event,
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": action,
+      "new_Label": label,
+      "new_General_Data": generalData
+    });
+    if (redirecturl) {
+      setTimeout(function() {
+        if (target && target.toLowerCase() == 'yes') {
+          window.open(redirecturl, '_blank');
+        } else {
+          window.location.href = redirecturl;
+        }
+      }, 300);
+    }
+  } catch (e) {}
+}
+
+function GAToggleTabsDS(TabName, ToggleType) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": ToggleType,
+      "new_Label": "toggle-" + TabName
+    });
+  } catch (e) {}
+}
+
+function GACustomPlansButtonDS(newLabel, value, packName, generalData) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Plan cards",
+      "new_Label": newLabel,
+      "eventValue": value,
+      "PackName": packName,
+      "RechargeType": GAFieldCategoryDS,
+      "new_General_Data": generalData
+    });
+  } catch (e) {}
+}
+
+function navclicks(title) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Header Click",
+      "new_Label": title
+    });
+  } catch (e) {}
+}
+
+function GAJioBookVideoDS(videoTitle) {
+  try {
+    dataLayer.push({
+      "event": "revamped_jiocom",
+      "new_Category": GAFieldCategoryDS,
+      "new_Action": "Videos",
+      "new_Label": videoTitle
+    });
+  } catch (e) {}
+}

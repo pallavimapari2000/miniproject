@@ -1,0 +1,86 @@
+
+// popup
+
+
+
+$(function () {
+    $('[data-popup-open]').on(
+      'click',
+      function (e) {
+        var targeted_popup_class = jQuery(this)
+          .attr('data-popup-open');
+        $(
+          '[data-popup="'
+          + targeted_popup_class
+          + '"]').addClass('j-modal-visible');
+       // $('body').addClass("overflow-hidden");
+        $("body").css({"overflow": "hidden"});
+       
+
+        //$('body').toggleClass('pkv-modal-open');
+        //e.preventDefault();
+      });
+    $('[data-popup-close]').on(
+      'click',
+      function (e) {
+        var targeted_popup_class = jQuery(this)
+          .attr('data-popup-close');
+        $(
+          '[data-popup="'
+          + targeted_popup_class
+          + '"]').removeClass('j-modal-visible');
+          //$('body').removeClass("overflow-hidden");
+          $('body').removeAttr('style');
+        // $('body').toggleClass('pkv-modal-open');
+        //e.preventDefault();
+      });
+  });
+
+  
+
+//model youtube video function start
+
+var $videoSrc;
+$('.video-btn').click(function () {
+  $videoSrc = $(this).data("src");
+  //$("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+});
+
+$('.video-btn-close').click(function () {
+  $("#video").attr('src', '');
+});
+
+//model youtube video function end	
+  
+// modal backdrop close function
+$(document).on('click', function(event) { 
+  if ($(event.target).has('.j-modal-container').length) {
+    $(".j-modal").removeClass('j-modal-visible');
+    $('body').removeAttr('style');
+    // video closing modal
+    $("#video").attr('src', '');
+} 
+});
+
+
+
+if ($(window).width() <= 619) {
+  $('.maskhead-card .j-text-heading-l').addClass('j-text-heading-xs');
+  $('.maskhead-card .j-text-body-l').addClass('j-text-body-s');
+  $('.card-vertical-default  .j-text-heading-s').addClass('j-text-heading-xs'); 
+};
+
+
+
+	$( window ).resize(function() {
+		if ($(window).width() <= 992) {
+  $('.maskhead-card .j-text-heading-l').addClass('j-text-heading-xs');
+  $('.maskhead-card .j-text-body-l').addClass('j-text-body-s');
+  $('.card-vertical-default  .j-text-heading-s').addClass('j-text-heading-xs');
+		}
+		else{
+	$('.maskhead-card .j-text-heading-l').removeClass('j-text-heading-xs');
+	$('.maskhead-card .j-text-body-l').removeClass('j-text-body-s');
+	$('.card-vertical-default  .j-text-heading-s').removeClass('j-text-heading-xs');
+		}
+	});

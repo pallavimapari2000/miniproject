@@ -1,0 +1,222 @@
+var folderenv='';
+var version='10.18';
+
+var isBtAlreadyClicked=false;
+var leadJourney='';
+
+function loadGMapJS(pageType){
+
+	(function(){
+		var libs=[];
+
+		  //three JS files that need to be loaded one after the other
+		  libs.push('https://maps.googleapis.com/maps/api/js?v=3.26&libraries=places&region=IN&client=gme-reliancecorporate1');
+
+      libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/js/map/markerWithLabel.js');
+			if (pageType && pageType == 'fiberFullpage') {
+
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/fullpage-fiber-lead-script-DS2O.js?version=' + version);
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom-fiberDS2O.js?version=' + version);
+
+		 } else if (pageType && pageType == 'centrex') {
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/centrex-lead-script-DS2O.js?version=' + version);
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom-centrexDS2O.js?version=' + version);
+		 }  else if (pageType && pageType == '5GChecker') {
+		 //  libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom-fiberDS2O.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/select2.full.min.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5Gcompatibilitylead-script-DS2O.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5Gcoveragecheckerlead-script-DS20.js?version=' + version);
+		 } else if (pageType && pageType == '5GCheckerStandalone') {
+		 //  libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom-fiberDS2O.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/select2.full.min.js?version=' + version);
+				 // libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/googlemaps-custom.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5Gcompatibilitylead-script-DS2O.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5Gcoveragecheckerlead-script-DS20.js?version=' + version);
+					libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5G-lead-script-DS2O.js?version=' + version);
+		 }else {
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/sim-lead-script-DS2O.js?version=' + version);
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/fiber-lead-script-DS2O.js?version=' + version);
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/'+folderenv+'js/googlemaps-custom-fiberDS2O.js?version='+version);
+				libs.push('https://jep-asset.akamaized.net/jiostaticresources/v02/'+folderenv+'js/googlemaps-custom.js?version='+version);
+
+		 }
+
+		  var injectLibFromStack = function(){
+		      if(libs.length > 0){
+
+		        //grab the next item on the stack
+		        var nextLib = libs.shift();
+		        var headTag = document.getElementsByTagName('head')[0];
+
+		        //create a script tag with this library
+		        var scriptTag = document.createElement('script');
+		        scriptTag.src = nextLib;
+
+		        //when successful, inject the next script
+		        scriptTag.onload = function(e){
+
+				  if(libs.length==0){
+				 if(leadJourney=='fiber'){
+				   initializeStoreLocatorFiber();
+				   clearSessionValues("journey=FIBER&d=Touch");
+				 }
+				 if(leadJourney=='sim' ){
+					initializeStoreLocator();
+					preSelectConnectionTypes("newSim");
+				    clearSessionValues("journey=SIM&d=Touch");
+
+
+				 }
+				 if(leadJourney=='port' ){
+				  initializeStoreLocator();
+				  preSelectConnectionTypes("port");
+				  clearSessionValues("journey=PORT&d=Touch");
+				 }
+
+					 if(leadJourney=='centrex' ){
+					  initializeStoreLocatorcentrex();
+					  //clearSessionValues("journey=PORT&d=Touch");
+					 }
+				  }
+		          injectLibFromStack();
+		        };
+
+		        //append the script tag to the <head></head>
+		        headTag.appendChild(scriptTag);
+		        console.log("injecting: " + nextLib);
+		      }
+		      else return;
+		  }
+
+		  //start script injection
+		  injectLibFromStack();
+		})();
+}
+
+function downloadFrameWorkJSAtOnload(JSName) {
+var element = document.createElement("script");
+element.src = JSName;
+document.body.appendChild(element);
+}
+function downloadDependantFrameWorkJSAtOnload(JSName,dependentJS) {
+var headTag = document.getElementsByTagName('head')[0];
+var scriptTag = document.createElement('script');
+scriptTag.src = JSName;
+scriptTag.onload = function(e){
+downloadFrameWorkJSAtOnload(dependentJS);
+};
+headTag.appendChild(scriptTag);
+}
+
+function callFrameworkJS(){
+
+
+var headTag = document.getElementsByTagName('head')[0];
+//create a script tag with this library
+var scriptTag = document.createElement('script');
+scriptTag.src = 'https://jep-asset.akamaized.net/jiostaticresources/v02/js/jquery-3.6.0.min.js';
+scriptTag.onload = function(e){
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/main.js?version='+version);
+downloadDependantFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/slick.min.js?version='+version,'https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/ds20-common.js?version='+version);
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/jquery-ui.min.js?version='+version);
+
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/sites-bundle-LIVE.js?version='+version);
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/g-header.js?version='+version);
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v02/js/googleAnalytics.min.js?version='+version);
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/google-analytics-custom-DS2O.js?version='+version);
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/tabs.js?version='+version);
+if(document.getElementById('isMarqueeCityCount')){
+			 downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/jquery.liMarquee.js?version=' + version);
+			 var cityCount = document.getElementById('isMarqueeCityCount').value;
+			 var carouselSpeed = 60;
+			 if(document.getElementById('carouselSpeed')){
+				 carouselSpeed =   document.getElementById('carouselSpeed').value;
+			 }
+
+			 setTimeout(function(){
+					 console.log("callCityMarquee>>>");
+					 callCityMarquee(cityCount,carouselSpeed);
+				 }, 1000);
+		 }
+if(document.getElementById('isAnimReq') && document.getElementById('isAnimReq').value=='5GAnimation'){
+	 //      downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/animation.gsap.js?version=' + version);
+			 downloadDependantFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/ScrollMagic.js?version=' + version,'https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/animation.gsap.js?version=' + version);
+			 downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/TweenMax.min.js?version=' + version);
+ downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/jquery.carouselTicker.js?version=' + version);
+			 setTimeout(function(){
+					 console.log("animinit>>>");
+						 downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/5g.js?version=' + version);
+				 }, 1000);
+
+			 downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v02/' + folderenv + 'js/aos.js?version=' + version);
+			 try{
+				 setTimeout(function(){
+						 console.log("AOS init>>>");
+						 AOS.init();
+					 }, 1000);
+			 }catch(e){
+
+			 }
+		 }if(document.getElementById('isLottieReq') && document.getElementById('isLottieReq').value=='yes'){
+        setTimeout(function(){
+            console.log("lottie>>>");
+              downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/lottie-player.js?version=' + version);
+          }, 1000);
+      }
+if(window.location.href.toLowerCase().indexOf('/esim')> -1 || document.querySelector(".tab-list .tab-item a") || document.querySelector("select#custom-select")){
+  downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/ds20-eSIM.js?version=' + version);
+}
+if (window.location.href.toLowerCase().indexOf('/jio-tunes')> -1){
+downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/ds20-JIOTUNES.js?version='+version);
+}
+if(document.getElementsByClassName('circle-transition-section').length >0){
+				 callHomePageFrameworkJS();
+			 }
+        if(document.getElementById('get-jio-book') != null){
+          downloadDependantFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/ds20-common.js?version='+version,'https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/fullpage-jiobook-lead-script-DS2O.js?version=' + version);
+        }
+
+};
+headTag.appendChild(scriptTag);
+}
+
+function callQRPBFrameworkJS() {
+        downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/qr-pb-script-DS2O.js?version=' + version);
+}
+function callHomePageFrameworkJS() {
+	downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/jquery.liMarquee.js?version=' + version);
+	 downloadDependantFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/anim.min.js?version='+version,
+	 'https://jep-asset.akamaized.net/jiostaticresources/v05/'+folderenv+'js/homepage.js?version='+version
+   );
+}
+callFrameworkJS();
+
+function callCityMarquee(cityCount,speed){
+  try{
+    $('.vertical__marquee_function').liMarquee({
+  			direction: 'up',
+  			loop:-1,
+  			scrolldelay: 0,
+  			scrollamount:speed,
+  			circular: true,
+        hoverstop:false,
+  			drag: false
+  		});
+  }catch(e){
+    console.info("Exception loading Marquee >> " + e);
+    setTimeout(function(){
+        console.info("calling marquee again>>>");
+        $('.vertical__marquee_function').liMarquee({
+  			direction: 'up',
+  			loop:-1,
+  			scrolldelay: 0,
+  			scrollamount:speed,
+  			circular: true,
+        hoverstop:false,
+  			drag: false
+  		});
+      }, 1500);
+  }
+
+}

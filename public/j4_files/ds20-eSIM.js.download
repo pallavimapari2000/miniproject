@@ -1,0 +1,111 @@
+$(document).ready(function() {
+
+    var isClicked = false;
+    var eSIMDevicestatus="";
+    $(".modal-device-availability-banner").click(function() {
+        $(".modal-device-availability").click();
+    });
+$(".modal-device-availability").click(function() {
+if(!isCentrexAlreadyClicked){
+var id = $(".modal-device-availability").attr('data-id');
+loadDevicesPop(id);
+isClicked = true;
+}
+});
+
+$(".section-slide-btn").click(function() {
+    $('html,body').animate({
+    scrollTop: $("#use-esim-section").offset().top},
+    'slow');
+    });
+    
+    
+    
+    //slick init on tabs click function
+    if ($(window).width() < 992) {
+    $(".tab-list .tab-item a").on('click', function () {
+    // alert("test");
+    $('.common_card_row_carousel_function').slick('slickAdd');
+    });
+    };
+    
+    
+    
+    $(".btn-compatible").click(function(){
+    $(".hide-configure-text").hide();
+    $(".show-configure-text").show();
+    $(".show-configure-device").show();
+    $('.common_card_row_carousel_function_slide').slick('slickAdd');
+    // $('html,body').animate({
+    // scrollTop: $("#configure-device").offset().top},
+    // 'slow');
+    })
+    
+    
+    
+    
+    //enable drp
+    
+    
+    
+    $(".j-field.input-dropdown").change(function(){
+    
+    
+    
+    if($($(this).find(":selected")))
+    {
+    
+    
+    
+    $(this).next().removeClass("input-disabled");
+    $(this).next().find("select").prop("disabled", false);
+    }
+    
+    
+    
+    else{
+    $(this).next().addClass("input-disabled");
+    $(this).next().find("select").prop("disabled", true);
+    }
+    })
+    
+    
+    
+    $(".j-field.input-dropdown.modal-drp-list").change(function(){
+    
+   $(".show-device-text").show()
+    
+   displayStepsImages();
+    
+    
+    })
+   
+});
+
+function loadDevicesPop(id) {
+    console.log("view details clicked");
+    var datastring = "param1=" + id + "&d=Touch";
+    
+    
+    
+    $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/CompatibleDevicePopUp",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+    var resultList = jqXHR.responseText;
+    // $(".plan-overlay-isd-pack").html('');
+    // $(".plan-overlay-isd-pack").html(resultList);
+    // $(".plan-overlay-isd-pack").fadeIn();
+    $("#modal-device-availability").html(data);
+    console.log("ajax success");
+
+    //$(".redirectButton").removeAttr("data-popup-open");
+    //$('button.modal-device-availability').attr('data-popup-open','modal-device-availability');
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+    // GA tagging due
+    },
+    });
+    }

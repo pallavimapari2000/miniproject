@@ -1,0 +1,85 @@
+function triggerChooseProduct(pid,productName,prodPrice,prodBrand,prodType,variant,quantity)
+{dataLayer.push({"event":"buyNow","ecommerce":{"currencyCode":"INR","add":{"products":[{"id":pid,"name":productName,"price":prodPrice,"brand":prodBrand,"category":prodType,"variant":variant,"quantity":quantity}]}}});}
+function addToCart(id,productName,prodPrice,prodBrand,prodType,variant,quantity,pName)
+{dataLayer.push({"event":"addToCart","ecommerce":{"currencyCode":"INR","list":pName,"add":{"products":[{"id":id,"name":productName,"price":prodPrice,"brand":prodBrand,"category":prodType,"variant":variant,"quantity":quantity}]}}});}
+function deviceImpression(id,productName,prodPrice,prodBrand,prodType,position,quantity)
+{dataLayer.push({"event":"addToCart","ecommerce":{"currencyCode":"INR","impressions":[{"id":id,"name":productName,"price":prodPrice,"brand":prodBrand,"category":prodType,"position":position,"list":quantity}]}});}
+
+function triggerBuy(pid,productName,prodPrice,prodBrand,prodType,variant,quantity){dataLayer.push({"ecommerce":{"currencyCode":"INR","detail":{"products":[{"id":pid,"name":productName,"price":prodPrice,"brand":prodBrand,"category":prodType,"variant":variant,"quantity":quantity}]}}});}
+function triggerRemoveItemFromCart(prodId,prodName,ProdPrice,prodBrand,prodCategory,prodVariant,prodQuantity){dataLayer.push({"event":"removeFromCart","ecommerce":{"currencyCode":"INR","remove":{"products":[{"id":prodId,"name":prodName,"price":ProdPrice,"brand":prodBrand,"category":prodCategory,"variant":prodVariant,"quantity":prodQuantity}]}}});}
+function triggerCheckout(prodId,prodName,ProdPrice,prodBrand,prodCategory,prodVariant,prodQuantity){dataLayer.push({"event":"checkout","ecommerce":{"checkout":{"actionField":{"step":0},"products":[{"id":prodId,"name":prodName,"price":ProdPrice,"brand":prodBrand,"category":prodCategory,"variant":prodVariant,"quantity":prodQuantity}]}}});}
+function triggerProdClick(pageName,prodId,prodName,ProdPrice,prodBrand,prodCategory,prodPosition){dataLayer.push({"event":"productClick","ecommerce":{"click":{"actionField":{"list":pageName},"products":[{"id":prodId,"name":prodName,"price":ProdPrice,"brand":prodBrand,"category":prodCategory,"position":prodPosition}]}}});}
+function triggerProdInfo(pageName,prodId,prodName,ProdPrice,prodBrand,prodCategory,prodVariant,prodQuantity){dataLayer.push({"event":"productClick","ecommerce":{"currencyCode":"INR","click":{"actionField":{"list":pageName},"products":[{"id":prodId,"name":prodName,"price":ProdPrice,"brand":prodBrand,"category":prodCategory,"variant":prodVariant,"quantity":prodQuantity}]}}});}
+function relatedDevices(relatedDevice){
+  // TODO
+}
+function triggerCircleGA(pageName,location,circle){dataLayer.push({'event':'clickTrack','eventCategory':circle,'eventAction':pageName,'eventLabel':location});}
+function triggerBannerGA(category,bannerName,destBannerName,linkName){dataLayer.push({'event':'clickTrack','eventCategory':category,'eventAction':bannerName,'eventLabel':linkName+"|"+destBannerName});}
+function triggerbuyNowGA(category,action,pageURL,productName){dataLayer.push({'event':'clickTrack','eventCategory':category,'eventAction':action,'eventLabel':pageURL+"|"+productName});}
+function triggerStoryGA(category,storyName){dataLayer.push({'event':'clickTrack','eventCategory':category,'eventAction':storyName});}
+function triggerQuickRecharge(pageURL,pageTitle){dataLayer.push({'event':'VirtualPageview','virtualPageURL':pageURL,'virtualPageTitle':pageTitle});}
+function triggerWidgetGA(category,iconName,currentURL,productName,destURL){dataLayer.push({'event':'clickTrack','eventCategory':category,'eventAction':iconName+"|"+currentURL,'eventLabel':productName+"|"+destURL});}
+function triggerReferralGA(category,eventAction,eventLabel,referralNum){dataLayer.push({'event':'clickTrack','eventCategory':category,'eventAction':eventAction,'eventLabel':eventLabel,'eventValue':referralNum});}
+function triggerRegisterGA(event,JLabel,contact){dataLayer.push({'event':event,'JLabel':JLabel,'JEmail':contact});}
+
+function triggerMainHeaderGA(linkName,target){
+dataLayer.push ({"event": "new_homepage",
+                 "new_Category": "Business Vertical Selection",
+                 "new_Action": linkName,
+                 "new_Label": "Click"
+                 });
+                 if(target){
+                    setTimeout(function() {
+                        window.location = target;
+                    }, 500 );
+                  }
+}
+
+function triggerHeaderFooterGA(category,linkName,target){
+    dataLayer.push ({"event": "new_homepage",
+     "new_Category": "Mobility - HomeClicks",
+"new_Action": category,
+ "new_Label": linkName
+});
+if(target){
+  setTimeout(function() {
+      window.location = target;
+  }, 500 );
+}
+
+}
+
+
+function triggerCommonGA(category,pagenotfoundURL,linkText,target){
+  try{
+    dataLayer.push ({ "event" : " new_homepage ",
+    "new_Category" : "Mobility - HomeClicks",
+    "new_Action" : "FooterClicks",
+    "new_Label" : category
+                   });
+                   if(target){
+                     setTimeout(function() {
+                         window.location = target;
+                     }, 500 );
+                   }
+  } catch(e){
+
+  }
+  
+    }
+
+function triggerslideGA(linkName){
+    dataLayer.push ({ "event" : " new_homepage ",
+     "new_Category" : "Mobility - HomeClicks",
+     "new_Action" : "FooterClicks",
+     "new_Label" : linkName
+                    });
+                    }
+
+function socialclicks(title) {
+dataLayer.push ({ "event" : "new_homepage ",
+                  "new_Category" : "Mobility - HomeClicks",
+                  "new_Action" : "Connect with us",
+                  "new_Label" : title
+                  })
+}

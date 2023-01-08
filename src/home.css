@@ -1,0 +1,19 @@
+.cont
+{
+    margin: 0px;
+    
+    /* background-image: url('D:\Abhishek sir\newproject\public\img6.webp');  */
+    background-image: url('D:\Abhishek sir\newproject\src\img5.jpeg');  
+    opacity: 0.8; 
+
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height:100vh;
+    width:100vw; 
+    
+}
+
+
+
+
+

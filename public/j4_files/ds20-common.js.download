@@ -1,0 +1,1956 @@
+var appContext = "";
+if (location.hostname && location.href.indexOf('cs/jio') > -1) {
+  appContext = "/cs/jio";
+}
+
+function open5gPopup(modalType) {
+  if (modalType && modalType == 'compatibility') {
+    $('#modal-coveragechecker-close').click();
+    $('#checkcompatib-standalone').click();
+  } else if (modalType && modalType == 'coverage') {
+    $('#fiber-popup-close-id').click();
+    $('#coveragechecker').click();
+  } else if (modalType && modalType == 'lcompatibility') {
+    $(".CompAndCoverLead header button").click();
+    $('#checkcompatib-standalone').click();
+  } else if (modalType && modalType == 'lcoverage') {
+    $(".CompAndCoverLead header button").click();
+    $('#coveragechecker').click();
+  }
+}
+$(document).ready(function() {
+  try {
+    if (getQueryVariable('source') && getQueryVariable('source').toLowerCase() == 'jioads' && document.getElementById('iminterested-5g')) {
+      document.getElementById('iminterested-5g').style.display = 'none';
+    }
+    if(getQueryVariable('header') && getQueryVariable('header').toLowerCase()== 'no'){
+     if ($('#cityTween').length > 0) {
+     $('#cityTween').hide();
+     }
+
+    }
+  } catch (e) {
+    console.info("exception hiding jioads button " + e);
+  }
+  if (document.getElementById('isAnimReq') && document.getElementById('isAnimReq').value == '5GAnimation') {
+    //Calling 5g popup on load
+  //  load5GcoverageJourney();
+  //  load5GcompatibilityJourneyStandalone();
+  downloadDependantFrameWorkJSScriptAtOnload("https://jep-asset.akamaized.net/jiostaticresources/v05/js/select2.full.min.js",()=>{
+
+  load5GcoverageJourney();
+    load5GcompatibilityJourneyStandalone();
+
+
+ })
+  }
+  if ($('.common_card_row_carousel_function_autoplay').length > 0) {
+  $('.common_card_row_carousel_function_autoplay').slick({
+              //infinite:false,
+              dots:true,
+         arrows: false,
+          autoplay: true,
+       // autoplaySpeed: 8000,
+         slidesToShow: 3,
+         slidesToScroll: 3,
+         speed: 900,
+              responsive: [
+
+                {
+                  breakpoint: 992,
+                      settings: {
+                        slidesToShow: 2.1,
+                        slidesToScroll: 1,
+                        arrows:false,
+                        dots: true
+                      }
+                },
+                {
+                  breakpoint: 620,
+                  settings: {
+
+                    slidesToShow: 1.02,
+                    slidesToScroll: 1,
+                    arrows:false,
+                    dots: true
+                  }
+                },
+              ]
+            });
+        }
+  if ($('.common_card_row_carousel_function_1').length > 0) {
+    $('.common_card_row_carousel_function_1').slick({
+      //infinite:false,
+      dots: true,
+      arrows: false,
+      autoplay: true,
+      // autoplaySpeed: 8000,
+      slidesToShow: 3,
+      speed: 900,
+      responsive: [{
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2.1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1.02,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+      ]
+    });
+    $(window).resize(function() {
+      $(".common_card_row_carousel_function_1").slick("slickRemove");
+      $(".common_card_row_carousel_function_1").slick("slickAdd");
+    });
+  }
+  if ($('#FlashScreenTimer').val()) {
+    onpageFloaterCheck($('#FlashScreenTimer').val());
+  }
+  if ($('.testimonial__slick').length > 0) {
+    $('.testimonial__slick').slick({
+      dots: true,
+      infinite: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      slidesToShow: 1
+    });
+  }
+  if ($('.common_card_row_carousel_function_slide_desk').length > 0) {
+    $('.common_card_row_carousel_function_slide_desk').slick({
+      infinite: false,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      arrows: false,
+      dots: true,
+      responsive: [{
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2.1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true,
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1.2,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+      ]
+    });
+  }
+  if ($('.common_card_row_carousel_function_slide').length > 0) {
+    if ($(window).width() <= 992) {
+      $('.common_card_row_carousel_function_slide').slick({
+        infinite: false,
+        responsive: [{
+            breakpoint: 9999,
+            settings: "unslick",
+          },
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 2.1,
+              slidesToScroll: 1,
+              arrows: false,
+              dots: true,
+            },
+          },
+          {
+            breakpoint: 620,
+            settings: {
+              slidesToShow: 1.02,
+              slidesToScroll: 1,
+              arrows: false,
+              dots: true,
+            },
+          },
+        ],
+      })
+      var slickHeight = $(".div-height .slick-track").height();
+      /// alert(slickHeight)
+      $(".jds-tabs .tab-list .tab-item a").on('click', function() {
+        // alert("test");
+        $(".common_card_row_carousel_function_slide").slick("refresh");
+        //$('.common_card_row_carousel_function_slide').slick("slickAdd");
+        $(".div-height .slick-track").find(".slick-slide.j-card").css("min-height", slickHeight + "px");
+      });
+    };
+  }
+  if ($('.card_sm_row_carousel_function_scroll').length > 0) {
+    $('.card_sm_row_carousel_function_scroll').slick({
+      infinite: false,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      arrows: false,
+      dots: true,
+      responsive: [{
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 3.1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1.2,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+      ]
+    });
+  }
+  if ($('.card_sm_row_carousel_function').length > 0) {
+    $('.card_sm_row_carousel_function').slick({
+      infinite: false,
+      responsive: [{
+          breakpoint: 9999,
+          settings: "unslick"
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 3.1,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1.2,
+            slidesToScroll: 1,
+            arrows: false,
+            dots: true
+          }
+        },
+      ]
+    });
+  }
+  if ($('.multiple-items').length > 0) {
+    $('.multiple-items').slick({
+      // infinite: true,
+      slidesToShow: 4.5,
+      slidesToScroll: 3,
+      infinite: false,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 3.2,
+            slidesToScroll: 3,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick"
+        },
+      ]
+    });
+  }
+  /*
+	if($('.multiple-items-plans').length > 0 ){
+	  $('.multiple-items-plans').slick({
+	   // infinite: true,
+	    slidesToShow: 3,
+	    slidesToScroll: 1,
+	    infinite:false,
+
+	    responsive: [
+	      {
+	        breakpoint: 1030,
+	        settings: {
+	          slidesToShow: 1,
+	          slidesToScroll: 1,
+	          arrows:false,
+
+
+	         // infinite: true,
+	         // dots: true
+	        }
+	      },
+	      {
+	        breakpoint:620,
+	         settings:"unslick",
+	        },
+
+
+
+
+	    ]
+	  });
+	}
+	*/
+  if ($('.card-fluid-carousel').length > 0) {
+    $('.card-fluid-carousel').slick({
+      dots: false,
+      arrows: false,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      responsive: [{
+        breakpoint: 620,
+        settings: "unslick"
+      }, ]
+    });
+  }
+  if ($('.card-fluid-service').length > 0) {
+    $('.card-fluid-service').slick({
+      dots: false,
+      arrows: false,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [{
+        breakpoint: 620,
+        settings: "unslick"
+      }, ]
+    });
+  }
+  // needed for card fluid carousel
+  //card fluid carousel end
+  if ($('.multiple-items').length > 0) {
+    $('.multiple-items').slick({
+      // infinite: true,
+      slidesToShow: 4.5,
+      slidesToScroll: 3,
+      infinite: false,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 3.2,
+            slidesToScroll: 3,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick"
+        },
+      ]
+    });
+  }
+  if ($('.multiple-items-plans').length > 0) {
+    $('.multiple-items-plans').slick({
+      // infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      infinite: false,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 2.2,
+            slidesToScroll: 1,
+            arrows: false,
+            // infinite: true,
+            // dots: true
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick",
+        },
+      ]
+    });
+  }
+  if ($('.card-multi-carousel').length > 0) {
+    $('.card-multi-carousel').slick({
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      infinite: false,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 3.1,
+            slidesToScroll: 3,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick"
+        },
+      ]
+    });
+  }
+  if ($('.card-fetaures-carousel').length > 0) {
+    $('.card-fetaures-carousel').slick({
+      dots: true,
+      arrows: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 1.5,
+            slidesToScroll: 1,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick"
+        },
+      ]
+    });
+  }
+  // more jio carousel
+  if ($('.morejio-carousel').length > 0) {
+    $('.morejio-carousel').slick({
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      infinite: false,
+      responsive: [{
+          breakpoint: 1030,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false
+          }
+        },
+        {
+          breakpoint: 620,
+          settings: "unslick"
+        },
+      ]
+    });
+  }
+  // plan slick
+  if ($('.common_card_row_carousel_function').length > 0) {
+    var slickhandleSmallTabletDevice = function() {
+      if ($(window).width() <= 992) {
+        $('.common_card_row_carousel_function').slick({
+          //infinite: false,
+          responsive: [{
+              breakpoint: 9999,
+              settings: "unslick"
+            },
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 2.1,
+                slidesToScroll: 1,
+                arrows: false,
+                autoplay:true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 620,
+              settings: {
+                slidesToShow: 1.02,
+                slidesToScroll: 1,
+                arrows: false,
+                autoplay:true,
+                dots: true
+              }
+            },
+          ]
+        });
+      };
+    };
+    slickhandleSmallTabletDevice();
+    $(window).resize(function() {
+      try {
+        //  slickhandleSmallTabletDevice();
+        if ($('.common_card_row_carousel_function').hasClass('slick-initialized')) {
+          $(".common_card_row_carousel_function").slick("slickRemove");
+          $(".common_card_row_carousel_function").slick("slickAdd");
+        }
+      } catch (e) {}
+    });
+  }
+  if ($('.2_column_carousel_function').length > 0) {
+    var slickSmallDevice = function() {
+      if ($(window).width() <= 992) {
+        $('.2_column_carousel_function').slick({
+          infinite: false,
+          responsive: [{
+              breakpoint: 9999,
+              settings: "unslick"
+            },
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 1.02,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 620,
+              settings: {
+                slidesToShow: 1.02,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true
+              }
+            },
+          ]
+        });
+      };
+    };
+    slickSmallDevice();
+    $(window).resize(function() {
+      try {
+        //  slickSmallDevice();
+        if ($('.2_column_carousel_function').hasClass('slick-initialized')) {
+          $(".2_column_carousel_function").slick("slickRemove");
+          $(".2_column_carousel_function").slick("slickAdd");
+        }
+      } catch (e) {}
+    });
+  }
+  // more jio carousel
+  if ($('.morejio-carousel').length > 0) {
+    $('.morejio-carousel').slick({
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      infinite: false,
+      responsive: [{
+        breakpoint: 620,
+        settings: {
+          slidesToShow: 1.02,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: true
+        }
+      }, ]
+    });
+  }
+});
+
+function details(VideoContentID) {
+  console.log("view details clicked");
+  var datastring = "&param1=" + VideoContentID + "&d=Touch";
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/RedirectionActionPopUp",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      var resultList = jqXHR.responseText;
+      //   $(".plan-overlay-isd-pack").html('');
+      //   $(".plan-overlay-isd-pack").html(resultList);
+      //   $(".plan-overlay-isd-pack").fadeIn();
+      $("#modal-btn").html(data);
+      console.log("ajax success");
+      $(".redirectButton").removeAttr("data-popup-open");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // GA tagging due
+    },
+  });
+}
+$(document).ready(function() {
+  if ($('.masthead-slick').length > 0) {
+    $('.masthead-slick').slick({
+      dots: true,
+      infinite: true,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 4000,
+      slidesToShow: 1,
+      speed: 1000,
+      fade: true,
+      cssEase: 'linear'
+    });
+  }
+});
+
+function viewdetails(PlanContentID) {
+  console.log("view details clicked");
+  var datastring = "&param1=" + PlanContentID + "&d=Touch";
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/ViewMorePopUp",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      var resultList = jqXHR.responseText;
+      // $(".plan-overlay-isd-pack").html('');
+      // $(".plan-overlay-isd-pack").html(resultList);
+      // $(".plan-overlay-isd-pack").fadeIn();
+      $("#plan-detail-modal").html(data);
+      console.log("ajax success");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // GA tagging due
+    },
+  });
+}
+
+function videodetails(VideoContentIDa, atype) {
+  console.log("view details clicked");
+  var datastring = "&param1=" + VideoContentIDa + "&d=Touch";
+  if (atype && atype == 'FAQ') {
+    datastring = datastring + "&atype=" + atype;
+  }
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/VideoPopUp",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      var resultList = jqXHR.responseText;
+      //   $(".plan-overlay-isd-pack").html('');
+      //   $(".plan-overlay-isd-pack").html(resultList);
+      //   $(".plan-overlay-isd-pack").fadeIn();
+      $("#modal-video").html(data);
+      console.log("ajax success");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // GA tagging due
+    },
+  });
+}
+/*function videofulldetails(VideoContentIDa,atype) {
+    console.log("view details clicked");
+    var datastring = "&param1=" + VideoContentIDa + "&d=Touch";
+if(atype && atype=='FAQ'){
+    datastring = datastring + "&atype="+atype;
+}
+    $.ajax({
+        type: "GET",
+        url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/VideoFullPopUp",
+        data: datastring,
+        cache: "false",
+        success: function(data, textStatus, jqXHR) {
+            var resultList = jqXHR.responseText;
+            //   $(".plan-overlay-isd-pack").html('');
+            //   $(".plan-overlay-isd-pack").html(resultList);
+            //   $(".plan-overlay-isd-pack").fadeIn();
+            $("#modal-video-custom").html(data);
+            console.log("ajax success");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            // GA tagging due
+        },
+    });
+}*/
+function irfulldetails() {
+  console.log("ir details clicked");
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/IRPopUp&d=Touch",
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      var resultList = jqXHR.responseText;
+      $("#modal-ir").html(data);
+      console.log("ajax success");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // GA tagging due
+    },
+  });
+}
+var isBtAlreadyClicked5Ginterested = false;
+$('#iminterested-5g, #iminterested-5g2').click(function() {
+  leadJourney = '5gChecker';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked5Ginterested) {
+    isBtAlreadyClicked5Ginterested = true;
+    load5GInterestedJourney();
+    //	load5GcompatibilityJourneyStandalone();
+    // loadGMapJS();
+  }
+});
+$('#coveragechecker').click(function() {
+  leadJourney = '5gChecker';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked) {
+    isBtAlreadyClicked = true;
+    //	load5GcoverageJourney();
+    //	load5GcompatibilityJourneyStandalone();
+    // loadGMapJS();
+  }
+});
+var isBtnAlreadyClickedLeadJourney = false;
+$('#checkcompatib').click(function() {
+  leadJourney = '5gChecker';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtnAlreadyClickedLeadJourney) {
+    isBtnAlreadyClickedLeadJourney = true;
+    //loadSimJourney();
+    load5GcompatibilityJourney();
+    // loadGMapJS();
+  }
+});
+$('#checkcompatib-standalone').click(function() {
+  leadJourney = '5gChecker';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked) {
+    isBtAlreadyClicked = true;
+    //	load5GcoverageJourney();
+    //	load5GcompatibilityJourneyStandalone();
+    // loadGMapJS();
+  }
+});
+$('#fiber,#fiber1').click(function() {
+  leadJourney = 'fiber';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked) {
+    isBtAlreadyClicked = true;
+    loadSimJourney();
+    loadFiberJourney();
+    // loadGMapJS();
+  }
+});
+$('#port').click(function() {
+  leadJourney = 'port';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked) {
+    isBtAlreadyClicked = true;
+    loadSimJourney();
+    loadFiberJourney();
+    // loadGMapJS();
+  }
+});
+$('#sim,#sim1').click(function() {
+  leadJourney = 'sim';
+  if ($('#captchaloadFiber').length > 0) {
+    $('#captchaloadFiber').html('');
+  }
+  if ($('#captchaload').length > 0) {
+    $('#captchaload').html('');
+  }
+  if ($('#captchaloadVOTPFiber').length > 0) {
+    $('#captchaloadVOTPFiber').html('');
+  }
+  if ($('#captchaloadVOTP').length > 0) {
+    $('#captchaloadVOTP').html('');
+  }
+  if (!isBtAlreadyClicked) {
+    isBtAlreadyClicked = true;
+    loadSimJourney();
+    loadFiberJourney();
+    // loadGMapJS();
+  }
+});
+
+function loadSimJourney(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/sim-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-getsim-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-getsim-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        if (leadJourney && leadJourney != 'fiber') {
+          loadGMapJS();
+        }
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          if (leadJourney && (leadJourney == 'fiber' || leadJourney == 'sim') || leadJourney == 'port') {
+            resetSimleadJourneyPopup();
+          }
+        });
+        textAreaAutoHeight();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function loadFiberJourney(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/fiber-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-get-fiber-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-get-fiber-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        if (leadJourney && leadJourney == 'fiber') {
+          loadGMapJS();
+        }
+        $('[data-popup-open]').on(
+          'click',
+          function(e) {
+            var targeted_popup_class = jQuery(this)
+              .attr('data-popup-open');
+            $(
+              '[data-popup="' +
+              targeted_popup_class +
+              '"]').addClass('j-modal-visible');
+            // $('body').addClass("overflow-hidden");
+            $("body").css({
+              "overflow": "hidden"
+            });
+            //$('body').toggleClass('pkv-modal-open');
+            //e.preventDefault();
+          });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          if (leadJourney && (leadJourney == 'fiber' || leadJourney == 'sim') || leadJourney == 'port') {
+            // resetSimleadJourneyPopup();
+          }
+        });
+        textAreaAutoHeight();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function load5GcompatibilityJourney(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/5gcompatibility-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-checkcompatib-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-checkcompatib-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        //leadJourney = "sim";
+        loadGMapJS('5GChecker');
+        returnDeviceList();
+        $('[data-popup-open]').on(
+          'click',
+          function(e) {
+            var targeted_popup_class = jQuery(this)
+              .attr('data-popup-open');
+            $(
+              '[data-popup="' +
+              targeted_popup_class +
+              '"]').addClass('j-modal-visible');
+            // $('body').addClass("overflow-hidden");
+            $("body").css({
+              "overflow": "hidden"
+            });
+            //$('body').toggleClass('pkv-modal-open');
+            //e.preventDefault();
+          });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          if (leadJourney && (leadJourney == 'fiber' || leadJourney == 'sim') || leadJourney == 'port') {
+            // resetSimleadJourneyPopup();
+          }
+        });
+        textAreaAutoHeight();
+        //  initializeStoreLocator();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function returnDeviceList() {
+  $('#dropdownpanel-brand-error-pop').addClass('d-none');
+  $('#brand-model-error-container-pop').hide();
+  $('#brand-error-pop').hide();
+  $('#model-error-pop').hide();
+  var brandName = $(".CompAndCoverLead .select-device-wrapper .brand").val();
+  var datastring = "brand=" + brandName + "&d=Touch";
+  $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .brand').select2({
+    placeholder: "Select brand",
+    //allowClear: true
+  });
+  $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .model').select2({
+    placeholder: "Select model",
+    //allowClear: true
+  });
+  $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .brand').one('select2:open', function(e) {
+    $('input.select2-search__field').prop('placeholder', 'Search');
+  });
+  if (brandName) {
+    $.ajax({
+      type: "GET",
+      url: "/cs/Satellite?pagename=RIL_DesignSystem2O/5G/ModelsList",
+      data: datastring,
+      success: function(data, textStatus, jqXHR) {
+        var resultList = jqXHR.responseText;
+        $("#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .model").html(data); //$("#select_model_standalone").html(data);
+        $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .brand').select2({
+          placeholder: "Select brand",
+          //allowClear: true
+        });
+        $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .model').select2({
+          placeholder: "Select model",
+          //allowClear: true
+        });
+        $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .brand').one('select2:open', function(e) {
+          $('input.select2-search__field').prop('placeholder', 'Search');
+        });
+        $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .model').one('select2:open', function(e) {
+          $('input.select2-search__field').prop('placeholder', 'Search');
+        });
+        $('#modal-checkcompatib-container .CompAndCoverLead .select-device-wrapper .model').parent().removeAttr("style");
+      },
+      error: function(jqXHR, textStatus, errorThrown) {},
+    });
+  }
+}
+
+function resetDeviceCheckerStandalone() {
+  $("#compatibility-standalone-checker").hide();
+  $('#compatibility-endscreen-standalone').hide();
+  $('#deviceselection-section').show();
+  $('#check-compatibility-btn').show();
+}
+
+function load5GcompatibilityJourneyStandalone(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/5gcompatibility-standalone-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-checkcompatib-standalone-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-checkcompatib-standalone-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        leadJourney = "5gcompatibility";
+        //  loadGMapJS('5GCheckerStandalone'); // commenting this as we call  this method in 5gcoveragechecker func
+        $('[data-popup-open]').on(
+          'click',
+          function(e) {
+            var targeted_popup_class = jQuery(this)
+              .attr('data-popup-open');
+            $(
+              '[data-popup="' +
+              targeted_popup_class +
+              '"]').addClass('j-modal-visible');
+            // $('body').addClass("overflow-hidden");
+            $("body").css({
+              "overflow": "hidden"
+            });
+            //$('body').toggleClass('pkv-modal-open');
+            //e.preventDefault();
+          });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          resetDeviceCheckerStandalone()
+        });
+        textAreaAutoHeight();
+        //  initializeStoreLocator();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function load5GInterestedJourney(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/5g-interested-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-iminterested-5g-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-iminterested-5g-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        loadGMapJS('5GCheckerStandalone');
+        $('[data-popup-open]').on(
+          'click',
+          function(e) {
+            var targeted_popup_class = jQuery(this)
+              .attr('data-popup-open');
+            $(
+              '[data-popup="' +
+              targeted_popup_class +
+              '"]').addClass('j-modal-visible');
+            // $('body').addClass("overflow-hidden");
+            $("body").css({
+              "overflow": "hidden"
+            });
+            //$('body').toggleClass('pkv-modal-open');
+            //e.preventDefault();
+          });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          resetCoverageStandalone();
+        });
+        textAreaAutoHeight();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function load5GcoverageJourney(datastring) {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/5gcoveragechecker-popup",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+      if (data) {
+        $("#modal-coveragechecker-container").html(data); //blank it first also on close
+        preventUpDownArrows();
+        $("#modal-coveragechecker-container").show();
+        //$('#custom-select2 select').zelect({ placeholder:'Select Model' });
+        loadGMapJS('5GCheckerStandalone');
+        $('[data-popup-open]').on(
+          'click',
+          function(e) {
+            var targeted_popup_class = jQuery(this)
+              .attr('data-popup-open');
+            $(
+              '[data-popup="' +
+              targeted_popup_class +
+              '"]').addClass('j-modal-visible');
+            // $('body').addClass("overflow-hidden");
+            $("body").css({
+              "overflow": "hidden"
+            });
+            //$('body').toggleClass('pkv-modal-open');
+            //e.preventDefault();
+          });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          resetCoverageStandalone();
+        });
+        textAreaAutoHeight();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function resetCoverageStandalone() {
+  $('#coverage-pincodesection-standalone').show();
+  $('#coverage-locationcheck-standalone').hide();
+  $('#coverage-endscreen-standalone').hide();
+  $('#pincodeClear-standalone').click();
+  $('#check-coverage-standalone').show();
+  $('#captchaloadCoverageStandalone').hide();
+  $('#captchaloadCoverageStandalone').html('');
+}
+
+function textAreaAutoHeight() {
+  // textarea autoheight
+  $("textarea").each(function() {
+    //this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden; background-color:Red");
+    this.setAttribute("style", "height: auto; overflow-y:hidden;");
+  }).on("input propertychange paste", function() {
+    //this.style.height = "auto";
+    this.style.height = (this.scrollHeight) + "px";
+    var CurrentTextareaVal = $(this).val();
+    $(this).prop("placeholder", " ");
+    if (CurrentTextareaVal == '') {
+      $(this).css("height", "auto");
+    } else {}
+  });
+  $(".lead-address .clear-btn").click(function() {
+    $(this).siblings(".wrapper").find("textarea").css("height", "auto");
+  });
+}
+var isQRAlreadyClicked = false;
+var isPBAlreadyClicked = false;
+$('#quick-recharge').click(function() {
+  if (!isQRAlreadyClicked) {
+    isQRAlreadyClicked = true;
+    var isFiber = $("#isFiber").val();
+    var url = appContext + '/qr-pop';
+    if (isFiber == 'true') {
+      url = appContext + '/qr-fiber-pop';
+    }
+    if (location.host && location.host.indexOf('selfcare.jiolabs.com') > -1) {
+      url = '/qr-pop';
+      if (isFiber == 'true') {
+        url = '/qr-fiber-pop';
+      }
+    }
+    $.ajax({
+      type: "GET",
+      url: url,
+      cache: "false",
+      success: function(data, textStatus, jqXHR) {
+        console.log("ajax success");
+        if (data) {
+          $('body').append(data);
+          downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/tabs.js?version=' + version);
+          preventUpDownArrows();
+          removejscssfile("qr-pb-script-DS2O.js", "js");
+          callQRPBFrameworkJS();
+          $(".quick-recharge-wrapper ul li").click(function(e) {
+            //$(".quick-recharge-wrapper #quick-recharge-user-number").val('');
+            $(".quick-recharge-wrapper .clickable.clear-btn").click();
+            if ($(this).text().trim().toLowerCase() == 'mobile') {
+              $('.qr-jiofiber-info').hide();
+              $('.quick-recharge-wrapper .clear-btn').attr("style", "");
+              $(".quick-recharge-wrapper .input-info-wrapper .j-contentBlock__content .j-contentBlock__description").text('Enter your Jio number');
+              $(".quick-recharge-wrapper #quick-recharge-user-number").attr("maxlength", "10");
+              $('.quick-recharge-wrapper #quick-recharge-user-number').siblings('label').text('Mobile Number');
+              $('.quick-recharge-wrapper .choose-plan-wrapper .mobility').show();
+              $('.quick-recharge-wrapper .choose-plan-wrapper .fiber').hide();
+              dataLayer.push({
+                "event": "revamped_jiocom",
+                "new_Category": "Mobile homepage ",
+                "new_Action": "Quick links popup",
+                "new_Label": "tab selected mobile"
+              });
+            } else {
+              $('.qr-jiofiber-info').show();
+              $('.quick-recharge-wrapper .clear-btn').attr("style", "margin-right: 22px");
+              $(".quick-recharge-wrapper .input-info-wrapper .j-contentBlock__content .j-contentBlock__description").text('Enter your JioFiber number');
+              $(".quick-recharge-wrapper #quick-recharge-user-number").attr("maxlength", "12");
+              $('.quick-recharge-wrapper #quick-recharge-user-number').siblings('label').text('JioFiber Number');
+              $('.quick-recharge-wrapper .choose-plan-wrapper .mobility').hide();
+              $('.quick-recharge-wrapper .choose-plan-wrapper .fiber').show();
+              dataLayer.push({
+                "event": "revamped_jiocom",
+                "new_Category": "Fiber homepage ",
+                "new_Action": " Quick links popup",
+                "new_Label": "tab selected fiber"
+              });
+            }
+            $('.quick-recharge-wrapper .clear-btn').hide();
+          });
+          var targeted_popup_class = 'modal-quickrecharge';
+          setTimeout(function() {
+            if (isFiber == 'true') {
+              $("a[aria-controls='fiber']").trigger('click');
+              $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+              $("body").css({
+                "overflow": "hidden"
+              });
+            } else {
+              $("a[aria-controls='mobile']").trigger('click');
+              $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+              $("body").css({
+                "overflow": "hidden"
+              });
+            }
+            $('.qr-jiofiber-info').click(function() {
+              $("[data-popup='modal-info']").addClass("j-modal-visible");
+              $('body').css({
+                'overflow': 'hidden'
+              })
+            });
+          }, 90);
+          $('[data-popup-close]').on(
+            'click',
+            function(e) {
+              var targeted_popup_class = jQuery(this)
+                .attr('data-popup-close');
+              $(
+                '[data-popup="' +
+                targeted_popup_class +
+                '"]').removeClass('j-modal-visible');
+              $('body').removeAttr('style');
+            });
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("ajax error");
+        // GA tagging due
+      },
+    });
+  }
+});
+$('#paybill').click(function() {
+  if (!isPBAlreadyClicked) {
+    isPBAlreadyClicked = true;
+    var isFiber = $("#isPayBillFiber").val();
+    var url = appContext + '/pb-pop';
+    if (isFiber == 'true') {
+      url = appContext + '/pb-fiber-pop';
+    }
+    if (location.host && location.host.indexOf('selfcare.jiolabs.com') > -1) {
+      url = '/pb-pop';
+      if (isFiber == 'true') {
+        url = '/pb-fiber-pop';
+      }
+    }
+    $.ajax({
+      type: "GET",
+      url: url,
+      cache: "false",
+      success: function(data, textStatus, jqXHR) {
+        console.log("ajax success");
+        if (data) {
+          $('body').append(data);
+          downloadFrameWorkJSAtOnload('https://jep-asset.akamaized.net/jiostaticresources/v05/' + folderenv + 'js/tabs.js?version=' + version);
+          preventUpDownArrows();
+          removejscssfile("qr-pb-script-DS2O.js", "js");
+          callQRPBFrameworkJS();
+          $(".pay-bill-wrapper ul li").click(function(e) {
+            //$(".quick-recharge-wrapper #quick-recharge-user-number").val('');
+            $(".pay-bill-wrapper .clickable.clear-btn").click();
+            var entry_source = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+            if (window.location.pathname.indexOf('fiber') > -1) {
+              entry_source = "Fiberpage banner";
+            }
+            if (window.location.pathname.indexOf('mobile') > -1) {
+              entry_source = "Mobilepage banner";
+            }
+            var loggedInStatus = "Non Logged In";
+            if ($('#loggedin-content').text() != '') {
+              loggedInStatus = "Logged In";
+            }
+            if ($(this).text().trim().toLowerCase() == 'mobile') {
+              $('.pb-jiofiber-info').hide();
+              $('.pay-bill-wrapper .clear-btn').attr("style", "");
+              $(".pay-bill-wrapper #paybill-user-number").attr("maxlength", "10");
+              $('.pay-bill-wrapper #paybill-user-number').siblings('label').text('Mobile Number');
+              /*dataLayer.push ({
+                "event" : "revamped_jiocom",
+                "new_Category" : "Mobile homepage",
+                "new_Action" : "Quick links popup",
+                "new_Label" : "tab selected mobile"
+              });*/
+              dataLayer.push({
+                "event": "quickpay_postpaid",
+                "new_Category": "Pay bill pop up",
+                "new_Action": "tab selection - mobile",
+                "new_Label": "click",
+                "EntrySource": entry_source,
+                "Recharge_Source": "jio.com",
+                "ServiceType": "mobility postpaid",
+                "RechargeType": "Fetch Bill popup | " + loggedInStatus
+              });
+            } else {
+              $('.pb-jiofiber-info').show();
+              $('.pay-bill-wrapper .clear-btn').attr("style", "margin-right: 22px");
+              $(".pay-bill-wrapper #paybill-user-number").attr("maxlength", "12");
+              $('.pay-bill-wrapper #paybill-user-number').siblings('label').text('JioFiber Number');
+              /*dataLayer.push ({
+                "event" : "revamped_jiocom",
+                "new_Category" : "Mobile homepage ",
+                "new_Action" : "Quick links popup",
+                "new_Label" : "tab selected fiber"
+              });*/
+              dataLayer.push({
+                "event": "quickpay_postpaid",
+                "new_Category": "Pay bill pop up",
+                "new_Action": "tab selection - fiber",
+                "new_Label": "click",
+                "EntrySource": entry_source,
+                "Recharge_Source": "jio.com",
+                "ServiceType": "fiber postpaid",
+                "RechargeType": "Fetch Bill popup | " + loggedInStatus
+              });
+            }
+            $('.pay-bill-wrapper .clear-btn').hide();
+          });
+          var targeted_popup_class = 'modal-paybill';
+          setTimeout(function() {
+            if (isFiber == 'true') {
+              $("a[aria-controls='fiber1']").trigger('click');
+              $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+              $("body").css({
+                "overflow": "hidden"
+              });
+            } else {
+              $("a[aria-controls='mobile1']").trigger('click');
+              $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+              $("body").css({
+                "overflow": "hidden"
+              });
+            }
+            $('.pb-jiofiber-info').click(function() {
+              $("[data-popup='modal-pb-info']").addClass("j-modal-visible");
+              $('body').css({
+                'overflow': 'hidden'
+              })
+            });
+          }, 90);
+          $('[data-popup-close]').on(
+            'click',
+            function(e) {
+              var targeted_popup_class = jQuery(this)
+                .attr('data-popup-close');
+              $(
+                '[data-popup="' +
+                targeted_popup_class +
+                '"]').removeClass('j-modal-visible');
+              $('body').removeAttr('style');
+            });
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("ajax error");
+        // GA tagging due
+      },
+    });
+  }
+  setTimeout(function() {
+    var entry_source1 = "Homepage quicklinks"; // Homepage	quicklinks , Mobilepage banner , Fiberpage banner
+    if (window.location.pathname.indexOf('fiber') > -1) {
+      entry_source1 = "Fiberpage banner";
+    }
+    if (window.location.pathname.indexOf('mobile') > -1) {
+      entry_source1 = "Mobilepage banner";
+    }
+    var service_Type1 = "mobility postpaid";
+    if ($('[data-popup="modal-paybill"] [aria-selected="true"]').text().trim().toLowerCase() == 'fiber') {
+      service_Type1 = "fiber postpaid";
+    }
+    dataLayer.push({
+      "event": "quickpay_postpaid",
+      "new_Category": "Pay bill pop up",
+      "new_Action": "impression-paybill landing",
+      "new_Label": "click",
+      "EntrySource": entry_source1,
+      "Recharge_Source": "jio.com",
+      "ServiceType": service_Type1
+    });
+  }, 500);
+});
+
+function removejscssfile(filename, filetype) {
+  var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none" //determine element type to create nodelist from
+  var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none" //determine corresponding attribute to test for
+  var allsuspects = document.getElementsByTagName(targetelement)
+  for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
+    if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
+      allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+  }
+}
+
+function resetSimleadJourneyPopup() {
+  try {
+    $('.get-sim-wrapper .verify-number-wrapper').hide();
+    $('.get-sim-wrapper .choose-connection-wrapper').hide();
+    $('.get-sim-wrapper .address-wrapper').hide();
+    $('.get-sim-wrapper .input-info-wrapper').show();
+    $(".get-sim-wrapper .resend-otp-link").show();
+    $('#generateOTP-btn').show();
+    $('#modal-getsim-container .forw-confirm').hide();
+    $('#user-name').val('');
+    $('#user-name').attr('value', '');
+    $('#user-number').val('');
+    $('#user-number').attr('value', '');
+    $('#user-name').parent().find(".clear-btn").hide();
+    $('#user-number').parent().find(".clear-btn").hide();
+    $('#captchaload').hide();
+    $('#captchaload').removeClass('d-flex');
+    $('#captchaloadVOTP').hide();
+    $('#captchaloadVOTP').removeClass('d-flex');
+    $('#validate-otp-btn').hide();
+    $('.get-sim-wrapper .continue-btn').hide();
+  } catch (e) {}
+}
+
+function clearSessionValues(datastring) {
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL/Lead/ClearSession",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      console.log("ajax success");
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+$(document).ready(function() {
+  $("input[type=number]").on("focus", function() {
+    $(this).on("keydown", function(event) {
+      if (event.keyCode === 38 || event.keyCode === 40) {
+        event.preventDefault();
+      }
+    });
+  });
+  //Code for page reload on viewport change
+  /*  var currentViewport='';var resizedViewport='';
+if ($(window).width() <= 992) {
+console.log("mobile device");
+currentViewport='mobile';
+$('.l-breakpoint--desktop').empty();
+}
+else {
+console.log("desktop device"); currentViewport='desktop';
+$('.l-breakpoint--tablet, .l-breakpoint--mobile').empty();
+}
+
+
+
+// on resize check if viewport changed
+window.onresize = function(){
+if ($(window).width() <= 992) {
+resizedViewport='mobile';
+console.log(currentViewport + " ..mobile device.. " + resizedViewport);
+if(currentViewport!=resizedViewport){
+    setTimeout(function(){
+        window.location.reload();
+      });
+}
+}
+else {
+resizedViewport='desktop';
+console.log(currentViewport + " ..desktop device.. " + resizedViewport);
+if(currentViewport!=resizedViewport){
+    setTimeout(function(){
+        window.location.reload();
+      });
+}
+}
+}
+*/
+  //Code for page reload on viewport change Ends
+});
+var isCentrexAlreadyClicked = false;
+$(".modal-jiocentrex").click(function() {
+  if (!isCentrexAlreadyClicked) {
+    loadJioCentrexPop();
+    leadJourney = 'centrex';
+    isCentrexAlreadyClicked = true;
+  }
+});
+
+function loadJioCentrexPop() {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/centrex-popup",
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      if (data) {
+        $("body").append(data); //blank it first also on close
+        preventUpDownArrows();
+        loadGMapJS('centrex');
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          $('#contact-option-wrapper-id').hide();
+          $('#generate-number-wrapper-id').show();
+          $('#generateOTP-btn-centrex').show();
+          $("#location-wrapper-id").hide();
+          $("#generate-number-wrapper-id span.clear-btn").each(function() {
+            $(this).click()
+          });
+          $("#verify-number-wrapper-id").hide();
+          $("#validateOTP-btn-centrex").hide();
+          $("#address_map_wrapper-id").hide();
+        });
+        $('.modal-jiocentrex').click();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {},
+  });
+}
+var isMNPAlreadyClicked = false;
+$('.mnp,.modal-getsim').click(function() {
+  leadJourney = 'port';
+  if (!isMNPAlreadyClicked) {
+    isMNPAlreadyClicked = true;
+    loadFullSimJourney();
+    loadFullFiberJourney();
+  }
+});
+
+function loadFullSimJourney() {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/sim-popup",
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      //console.log("ajax success");
+      if (data) {
+        $("body").append('<div id="modal-getsim-container" data-popup="modal-getsim" class="j-modal j-modal-closable j-modal-size-s j-modal-kind-dialog get-sim-wrapper " aria-label="Get SIM" role="dialog" style="overflow-x: hidden;">' + data + '</div>');
+        preventUpDownArrows();
+        if (leadJourney && leadJourney != 'fiber') {
+          loadGMapJS();
+        }
+        var targeted_popup_class = 'modal-getsim';
+        $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+        $("body").css({
+          "overflow": "hidden"
+        });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          if (leadJourney && (leadJourney == 'fiber' || leadJourney == 'sim') || leadJourney == 'port') {
+            resetSimleadJourneyPopup();
+          }
+        });
+        textAreaAutoHeight();
+        setTimeout(function() {
+          preSelectConnectionTypes("port");
+        }, 6000);
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      //console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+
+function loadFullFiberJourney() {
+  $.ajax({
+    type: "GET",
+    url: appContext + "/fiber-popup",
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      //console.log("ajax success");
+      if (data) {
+        $("body").append('<div id="modal-get-fiber-container" data-popup="modal-get-fiber" class="j-modal j-modal-closable j-modal-size-s j-modal-kind-dialog get-fiber-wrapper " aria-label="Get Fiber" role="dialog" style="overflow-x: hidden;">' + data + '</div>');
+        preventUpDownArrows();
+        if (leadJourney && leadJourney == 'fiber') {
+          loadGMapJS();
+        }
+        var targeted_popup_class = 'modal-getsim';
+        $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+        $("body").css({
+          "overflow": "hidden"
+        });
+        $('[data-popup-open]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-open');
+          $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+          // $('body').addClass("overflow-hidden");
+          $("body").css({
+            "overflow": "hidden"
+          });
+        });
+        $('[data-popup-close]').on('click', function(e) {
+          var targeted_popup_class = jQuery(this).attr('data-popup-close');
+          $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+          $('body').removeAttr('style');
+          if (leadJourney && (leadJourney == 'fiber' || leadJourney == 'sim') || leadJourney == 'port') {
+            // resetSimleadJourneyPopup();
+          }
+        });
+        textAreaAutoHeight();
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      //  console.log("ajax error");
+      // GA tagging due
+    },
+  });
+}
+var isQRWithPlansAlreadyClicked = false;
+$('.modal-quickrechargewithplan').click(function() {
+  if (!isQRWithPlansAlreadyClicked) {
+    isQRWithPlansAlreadyClicked = true;
+    var url = appContext + '/qr-pop-with-plan';
+    var dyn = ($(this).attr("dynrechargelink"));
+    $.ajax({
+      type: "GET",
+      url: url,
+      cache: "false",
+      success: function(data, textStatus, jqXHR) {
+        console.log("ajax success");
+        if (data) {
+          $('body').append(data);
+          preventUpDownArrows();
+          removejscssfile("qr-pb-script-DS2O.js", "js");
+          callQRPBFrameworkJS();
+          var targeted_popup_class = 'modal-quickrechargewithplan';
+          $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+          $("body").css({
+            "overflow": "hidden"
+          });
+          $(".quick-recharge-wrapper-with-plan .input-info-wrapper .continue-btn").attr("dynrechargelink", dyn);
+          $("button.modal-quickrechargewithplan").click(function() {
+            var dyn2 = ($(this).attr("dynrechargelink"));
+            $(".quick-recharge-wrapper-with-plan .input-info-wrapper .continue-btn").attr("dynrechargelink", dyn2);
+          });
+          $('[data-popup-close]').on(
+            'click',
+            function(e) {
+              var targeted_popup_class = jQuery(this)
+                .attr('data-popup-close');
+              $(
+                '[data-popup="' +
+                targeted_popup_class +
+                '"]').removeClass('j-modal-visible');
+              $('body').removeAttr('style');
+            });
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log("ajax error");
+        // GA tagging due
+      },
+    });
+  }
+});
+
+function preventUpDownArrows() {
+  $("input[type=number]").on("focus", function() {
+    $(this).on("keydown", function(event) {
+      if (event.keyCode === 38 || event.keyCode === 40) {
+        event.preventDefault();
+      }
+    });
+  });
+}
+
+function videofulldetails(VideoContentIDa, atype, isImagePopup) {
+  console.log("view details clicked");
+  var datastring = "&param1=" + VideoContentIDa + "&atype=" + atype + "&d=Touch" + "&isimagepopup=" + isImagePopup;
+  $.ajax({
+    type: "GET",
+    url: "/cs/Satellite?pagename=RIL_DesignSystem2O/HomePage/VideoFullPopUp",
+    data: datastring,
+    cache: "false",
+    success: function(data, textStatus, jqXHR) {
+      var resultList = jqXHR.responseText;
+      if (isImagePopup) {
+        $("#modal-custom-img").html(data);
+      } else {
+        $("#modal-video-custom").html(data);
+      }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      // GA tagging due
+    },
+  });
+}
+$('.card_visible').each(function() {
+  $(this).find(".card_visible_list").slice(0, 9).show();
+});
+if ($("#loadMore").length > 0) {
+  // load more
+  $(function() {
+    var hiddenGlobal = $(".card_visible .card_visible_list:hidden").length;
+    $("#loadMore").on("click", function() {
+      console.log(" + " + hiddenGlobal);
+      var numToShow = 9;
+      if (hiddenGlobal < 15) {
+        numToShow = hiddenGlobal
+      }
+      $(".card_visible").find(".card_visible_list:hidden").slice(0, numToShow).slideDown(function() {
+        if ($(".card_visible").find(".card_visible_list:hidden").length === 0) {
+          $('#loadMore').hide()
+        }
+        $(".card_visible .card_visible_list:visible").removeClass("last");
+        $(".card_visible .card_visible_list:visible").last().addClass("last");
+        const totalHiddenLists = $(".card_visible .card_visible_list:hidden").length;
+        const totalVisibleLists = $(".card_visible .card_visible_list:visible").length;
+        setTimeout(function() {
+          $(window).scrollTop($(".card_visible .card_visible_list").eq(totalVisibleLists - (numToShow)).offset().top - 130);
+        }, 100);
+        hiddenGlobal = totalHiddenLists
+        console.log(totalHiddenLists);
+        console.log(totalVisibleLists);
+      })
+    });
+  });
+  $("html").css({
+    "scroll-behavior": "smooth"
+  });
+  // end load more
+}
+// view more faq
+$(function() {
+  $('.faqs_visible').each(function() {
+    $(this).find(".faqs-item-list").slice(0, 5).show();
+  });
+  var hiddenGlobal = $(".faqs_visible .faqs-item-list:hidden").length;
+  if ($("#faqLoadMore").length > 0) {
+    $("#faqLoadMore").on("click", function() {
+      console.log(" + " + hiddenGlobal);
+      var numToShow = 5;
+      if (hiddenGlobal < 8) {
+        numToShow = hiddenGlobal
+      }
+      $(".faqs_visible").find(".faqs-item-list:hidden").slice(0, numToShow).slideDown(function() {
+        if ($(".faqs_visible").find(".faqs-item-list:hidden").length === 0) {
+          $('#faqLoadMore').hide();
+        }
+        $(".faqs_visible .faqs-item-list:visible").removeClass("last");
+        $(".faqs_visible .faqs-item-list:visible").last().addClass("last");
+        const totalHiddenLists = $(".faqs_visible .faqs-item-list:hidden").length;
+        const totalVisibleLists = $(".faqs_visible .faqs-item-list:visible").length;
+        setTimeout(function() {
+          $(window).scrollTop($(".faqs_visible .faqs-item-list").eq(totalVisibleLists - (numToShow)).offset().top - 130);
+        }, 100);
+        hiddenGlobal = totalHiddenLists
+        console.log(totalHiddenLists);
+        console.log(totalVisibleLists);
+      })
+    });
+    $("html").css({
+      "scroll-behavior": "smooth"
+    });
+  }
+});
+// view more faq
+$(document).ready(function() {
+  if ($('.video_carousel_function').length > 0) {
+    $('.video_carousel_function').slick({
+      infinite: true,
+      slidesToShow: 2.4,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 1500,
+      dots: false,
+      centerMode: false,
+      arrows: false,
+      responsive: [{
+          breakpoint: 1367,
+          settings: {
+            slidesToShow: 2.4,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 1.6,
+            dots: true,
+          },
+        },
+        {
+          breakpoint: 620,
+          settings: {
+            slidesToShow: 1.02,
+          },
+        },
+      ],
+    });
+  }
+});
+$('[data-popup-open]').on('click', function(e) {
+  var targeted_popup_class = jQuery(this).attr('data-popup-open');
+  if (targeted_popup_class == "modal-video-custom_new") {
+    var vidUrl = jQuery(this).attr('data-src');
+    $("#videoCustom_new").attr("src", vidUrl);
+  }
+  $('[data-popup="' + targeted_popup_class + '"]').addClass('j-modal-visible');
+  // $('body').addClass("overflow-hidden");
+  $("body").css({
+    "overflow": "hidden"
+  });
+  //$('body').toggleClass('pkv-modal-open');
+  //e.preventDefault();
+  $('[data-popup="' + targeted_popup_class + '"]').removeAttr('style');
+});
+$('[data-popup-close]').on('click', function(e) {
+  var targeted_popup_class = jQuery(this).attr('data-popup-close');
+  $('[data-popup="' + targeted_popup_class + '"]').removeClass('j-modal-visible');
+  if (targeted_popup_class == "modal-video-custom_new") {
+    $("#videoCustom_new").attr("src", "");
+  }
+  //$('body').removeClass("overflow-hidden");
+  $('body').removeAttr('style');
+  // $('body').toggleClass('pkv-modal-open');
+  //e.preventDefault();
+});
+$(document).on("click", function(event) {
+  if ($(event.target).has(".j-modal-container").length) {
+    $(".j-modal").removeClass("j-modal-visible");
+    $("body").removeAttr("style");
+    // video closing modal
+    $("#videoCustom_new").attr("src", "");
+    //$("#video").attr("src", $videoSrc + video);
+    //$("#videoCustom_new").attr("src", $videoSrcCustom + videoCustom);
+  }
+});
+
+function buttonActionDecider(url, modalId){
+try{
+if(getQueryVariable('source') && getQueryVariable('source').toLowerCase()== 'jioads'){
+//ToDo
+var modalIdLocal ='modal-iminterested-5g';
+$('[data-popup="'+modalIdLocal+'"]').addClass('j-modal-visible');
+
+$("body").css({"overflow": "hidden"});
+}else if(getQueryVariable('source') && getQueryVariable('source').toLowerCase()=='myjio' && getQueryVariable('param1')){
+ //   gotoURLGeneric(url,'No');
+ var modalIdLocal ='modal-iminterested-5g';
+ $('[data-popup="'+modalIdLocal+'"]').addClass('j-modal-visible');
+
+$("body").css({"overflow": "hidden"});
+}else {
+  var modalIdLocal ='modal-iminterested-5g';
+  $('[data-popup="'+modalIdLocal+'"]').addClass('j-modal-visible');
+
+$("body").css({"overflow": "hidden"});
+}
+}catch(e){
+console.log("Exception in buttonActionDecider >> " + e);
+ }
+}
+
+function supportRevampGAGeneric(newaction, newlabel, url) {
+  try {
+    var loginType = "Non-logged in";
+    if (document.getElementById("loggedStatus")) {
+      loginType = document.getElementById("loggedStatus").value;
+    }
+    dataLayer.push({
+      "event": "support_homepage",
+      "new_Category": "support_homepage",
+      "new_Action": newaction,
+      "new_Label": newlabel,
+      "loginType": loginType
+    });
+    if (url != null) {
+      window.open(url, '_self')
+    }
+  } catch (e) {
+    console.log("Exception in  >> " + e);
+  }
+}
+
+function downloadDependantFrameWorkJSScriptAtOnload(JSName,dependentFunction=()=>{}) {
+var headTag = document.getElementsByTagName('head')[0];
+var scriptTag = document.createElement('script');
+scriptTag.src = JSName;
+scriptTag.onload = function(e){
+dependentFunction();
+};
+headTag.appendChild(scriptTag);
+}
+
+function gotoURLGenericMyjioCheck(urlVal, myjioUrlVal, target, obj) {
+          try {
+            var gotoUrl = urlVal;
+            if(getQueryVariable('header') && getQueryVariable('header').toLowerCase()== 'no'){
+              gotoUrl = myjioUrlVal;
+            }
+      if (gotoUrl && gotoUrl.toLowerCase() != 'null' && gotoUrl.indexOf('javascript') < 0) {
+                    setTimeout(function(){
+                      if ((target && target.toLowerCase() == 'yes') && !getQueryVariable('header')) {
+                        window.open(gotoUrl, '_blank');
+                    } else {
+                        window.open(gotoUrl, '_self');
+                    }
+                     }, 200);
+                  }
+
+
+          } catch (e) {}
+
+      }

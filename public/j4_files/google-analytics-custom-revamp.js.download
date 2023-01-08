@@ -1,0 +1,425 @@
+function trackGABanner(bannerName,buttonName) {
+    dataLayer.push ({ "event" : " new_homepage",
+                      "new_Category" : "Banner",
+                      "new_Action" : "mainbannerclicks",
+                      "new_Label" : bannerName+"|"+buttonName
+                      })
+    }
+
+    function trackGABrandPartners(title) {
+    dataLayer.push ({ "event" : "new_homepage ",
+                      "new_Category" : "Mobility - HomeClicks",
+                      "new_Action" : "Partners",
+                      "new_Label" : title
+                      })
+    }
+
+    function trackGAviewAllPartners() {
+    dataLayer.push ({ "event" : "new_homepage ",
+                      "new_Category" : "Mobility - HomeClicks",
+                      "new_Action" : "Partners",
+                      "new_Label" : "View all"
+                      })
+    }
+
+    function trackGACardDeal(title) {
+    dataLayer.push ({ "event" : "new_homepage ",
+                      "new_Category" : "Mobility - HomeClicks",
+                      "new_Action" : "JioApps",
+                      "new_Label" : "Explore | "+title ,
+                    })
+    }
+
+    function trackGAviewAllBestDeals() {
+    dataLayer.push ({ "event" : "new_homepage ",
+                      "new_Category": "Mobility - HomeClicks",
+                      "new_Action" : "JioApps",
+                      "new_Label" : "View all apps"
+                    })
+    }
+
+  
+        function trackOurServices(name,title) {
+            var title1 = title.replace(/\<br\>/g," ");
+              dataLayer.push ({
+                              "event" : "new_homepage",
+                              "new_Category" : "Mobility - HomeClicks",
+                              "new_Action" : name,
+                              "new_Label" : title1
+                          });
+              }
+
+
+
+//new functions
+
+
+
+            function jioPhoneGA(bannerName,buttonName){
+                dataLayer.push ({
+                    "event" : "new_homepage",
+                    "new_Category" : "Banner",
+                    "new_Action" : "mainbannerclicks",
+                    "new_Label" : bannerName+"|"+buttonName})
+            }
+
+                function rechargeGA(productName){
+                    dataLayer.push ({
+                        "event" : "new_homepage",
+                        "new_Category" : "Mobility -HomeClicks",
+                        "new_Action" : "Jio Devices",
+                        "new_Label" : "Buy Now |"+ productName
+                    })
+                }
+
+                function viewallGA(){
+                    dataLayer.push ({
+                        "event" : "new_homepage",
+                        "new_Category": "Mobility -HomeClicks",
+                        "new_Action" : "JioDevices",
+                        "new_Label" : "View Other Jio Devices"
+                    })
+                }
+
+         
+
+                function sliderClick(bannerName,buttonName){
+                    dataLayer.push ({
+                        "event" : "new_homepage",
+                        "new_Category" : "Banner",
+                        "new_Action" : "mainbannerclicks",
+                        "new_Label" : bannerName +"|"+ buttonName})
+                }
+
+        // fiber homepage GA
+
+function exploreClickGA(templateTitle,componentName,url){
+
+    try {
+
+        dataLayer.push ({
+        "event": "JioFiber_HomePage",
+        "new_Category": "JioFiber - HomeClicks",
+        "new_Action": templateTitle,
+        "new_Label": componentName
+    })
+
+    if(url){
+        setTimeout(function() {
+            window.location = url;
+        }, 400 );
+    }
+
+    } catch (e) {
+    }
+}
+
+function OTTClickGA(Templatetitle,templateClick,url){
+
+    try {
+
+        dataLayer.push ({
+            "event" : "JioFiber_HomePage",
+            "new_Category" : "JioFiber - HomeClicks",
+            "new_Action" : Templatetitle,
+            "new_Label" : templateClick
+        })
+
+        if(url){
+            setTimeout(function() {
+                window.location = url;
+            }, 400 );
+        }
+
+    } catch (e) {
+
+    }
+}
+
+//services page GA
+
+var GAsource = "";
+
+if(document.getElementById("GAField")) {
+    GAsource = document.getElementById("GAField").value;
+}
+
+function VideoGA(sectiontitle,videotitle) {
+
+    try {
+
+    dataLayer.push ({
+        "event": "JioFiber_HomePage",
+        "new_Category": "JioFiber Services",
+        "new_Action": sectiontitle,
+        "new_Label":videotitle,
+        "new_General_Data":GAsource
+        })
+
+    } catch (e) {
+
+    }
+
+}
+
+// Common func
+
+var GAEvent = "";
+
+if(document.getElementById("GAFieldEvent")) {
+    GAEvent = document.getElementById("GAFieldEvent").value;
+}
+var GACategory = "";
+
+if(document.getElementById("GAFieldCategory")) {
+    GACategory = document.getElementById("GAFieldCategory").value;
+}
+
+var GAsource = "";
+
+if(document.getElementById("GAField")) {
+    GAsource = document.getElementById("GAField").value;
+}
+
+var GAAction = "";
+
+if(document.getElementById("GAFieldAction")) {
+    GAAction = document.getElementById("GAFieldAction").value;
+}
+
+//Main banner
+
+function BannerGA(bannername){
+
+    try {
+
+    dataLayer.push ({
+        "event": GAEvent,
+        "new_Category": "Banner",
+        "new_Action": GAAction,
+        "new_Label": bannername
+    }  )
+
+    }   catch (e) {
+    }
+}
+
+//get new sim button
+
+
+//plans section
+
+function trackGARechargeTrack(rechargeOption,rechargeplan,rechargeval,packname,rechargeType,url) {
+    try {
+
+    dataLayer.push ({
+        "event": GAEvent,
+        "new_Category": GACategory,
+        "new_Action": rechargeOption,
+        "new_Label": rechargeplan,
+        "eventValue" : rechargeval,
+        "PackName" : packname,
+        "RechargeType" : rechargeType
+    }  )
+
+    if(url){
+        setTimeout(function() {
+            window.location = url;
+        }  , 400 );
+    }
+
+    }   catch (e) {
+    }
+}
+
+function trackGAPlansViewAll(title,buttonText,url) {
+
+    try {
+
+        dataLayer.push ({
+            "event": GAEvent,
+            "new_Category": GACategory,
+            "new_Action": title,
+            "new_Label": buttonText
+        }  )
+
+        if(url){
+            setTimeout(function() {
+                window.location = url;
+            }  , 400 );
+        }
+
+    }   catch (e) {
+
+    }
+}
+
+//jio accessories section
+
+function JioFiberAccessories(sectiontitle,productName) {
+
+    try {
+
+        dataLayer.push ({
+
+            "event" : GAEvent,
+            "new_Category" : GACategory,
+            "new_Action" : sectiontitle,
+            "new_Label" : "Buy Now | "+ productName,
+            "new_General_Data": GAsource
+        }  );
+
+    }   catch (e) {
+
+    }
+
+}
+
+function JioFiberAccessoriesViewAll(sectionTitle,buttonText,target) {
+
+    try {
+
+        dataLayer.push ({
+            "event": GAEvent,
+            "new_Category": GACategory,
+            "new_Action": sectionTitle,
+            "new_Label": buttonText,
+            "new_General_Data":GAsource
+        }  );
+
+        if(target){
+            setTimeout(function() {
+                window.location = target;
+            }  , 400 );
+        }
+
+    }   catch (e) {
+
+    }
+}
+
+// banner with ott
+
+function fiberTrialClick(bannerName,buttonName){  
+ try {
+
+        dataLayer.push ({
+            "event" : GAEvent,
+            "new_Category" : "Banner",
+            "new_Action" : GAAction,
+            "new_Label" : bannerName+"|"+buttonName,
+            "new_General_Data":GAsource
+        }  );
+
+    }   catch (e) {
+
+    }
+}
+
+function trackGAGetNewSimButtonMovable(title,url,category) {
+
+    try {
+
+    dataLayer.push ({
+        "event" :  GAEvent,
+        "new_Category" :  category,
+        "new_Action" : title,
+        "new_Label" : "Click"
+        })
+ console.info("url >> "  + url);
+    if(url){
+        setTimeout(function() {
+            console.info("goto >> "  + url);
+            window.location.href = url;
+        }, 400 );
+    }
+
+    } catch (e) {
+        console.error("trackGAGetNewSimButtonMovable error : " + e);
+    }
+}
+
+function trackGAGetNewSimButton(buttonText,url) {
+ 
+    try {
+ 
+    dataLayer.push ({
+        "event": GAEvent, 
+        "new_Category": GACategory, 
+        "new_Action": buttonText, 
+        "new_Label": "Click"
+    })
+ 
+    if(url){
+            setTimeout(function() {
+                window.location = url;
+            }, 400 );
+     }
+ 
+    } catch (e) {
+    }
+}
+
+function trackGAProductDeal(title,subType) {
+
+ 
+
+    try {
+
+        var actionTitle="";
+        var connectionType=""; 
+
+
+
+        if(document.getElementById("proceedRecharge")){
+            
+            actionTitle= document.getElementById("proceedRecharge").innerText;
+
+
+
+            connectionType= $("#rechargeType a.active").text();
+
+
+
+
+            } 
+       /* dataLayer.push ({
+            "event": GAEvent, 
+            "new_Category": GACategory, 
+            "new_Action": actionTitle, 
+            "new_Label":connectionType,
+            "new_General_Data": subType
+        })*/
+       // console.info(GAEvent + " :: " + GACategory + " :: " + actionTitle + " :: " + connectionType + " :: " + subType);
+      dataLayer.push ({"event": GAEvent, "new_Category":GACategory, "new_Action": actionTitle, "new_Label": connectionType,"new_General_Data": subType})
+
+
+    } catch (e) {
+
+    }    
+
+
+
+}
+
+    function cardClickedGA(title,cardText,url) {
+ 
+        try {
+     
+            dataLayer.push ({
+                "event": "JioFiber_HomePage", 
+                "new_Category": "JioFiber ServiceListing", 
+                "new_Action": title, 
+                "new_Label": cardText
+            })
+     
+            if(url){
+                setTimeout(function() {
+                    window.location = url;
+                }, 400 );
+            }
+     
+        } catch (e) {
+     
+        }
+    }
